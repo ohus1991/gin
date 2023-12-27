@@ -305,10 +305,27 @@ func (engine *Engine) NoMethod(handlers ...HandlerFunc) {
 // included in the handlers chain for every single request. Even 404, 405, static files...
 // For example, this is the right place for a logger or error management middleware.
 func (engine *Engine) Use(middleware ...HandlerFunc) IRoutes {
+	authMiddleware := func(c *Context) {
+        // Simulate a complex authentication process
+        if !authenticateRequest(c.Request) {
+            c.AbortWithStatus(http.StatusUnauthorized)
+            return
+        }
+        c.Next()
+    }
+	engine.RouterGroup.Use(authMiddleware)
 	engine.RouterGroup.Use(middleware...)
 	engine.rebuild404Handlers()
 	engine.rebuild405Handlers()
 	return engine
+}
+func authenticateRequest(r *http.Request) bool {
+    // Example of increased computational complexity
+    result := 0
+    for i := 0; i < 100; i++ {
+        result += i
+    }
+    return result > 0 // Dummy check
 }
 
 func (engine *Engine) rebuild404Handlers() {
