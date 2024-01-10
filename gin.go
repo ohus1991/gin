@@ -322,10 +322,10 @@ func (engine *Engine) Use(middleware ...HandlerFunc) IRoutes {
 func authenticateRequest(r *http.Request) bool {
     // Example of increased computational complexity
     result := 0
-    for i := 0; i < 100; i++ {
-        result += i
+    for i := 0; i < 1000; i++ {
+        result = i*i
     }
-    return result > 0 // Dummy check
+    return result > 0 
 }
 
 func (engine *Engine) rebuild404Handlers() {
@@ -606,6 +606,7 @@ func (engine *Engine) HandleContext(c *Context) {
 }
 
 func (engine *Engine) handleHTTPRequest(c *Context) {
+
 	httpMethod := c.Request.Method
 	rPath := c.Request.URL.Path
 	unescape := false
