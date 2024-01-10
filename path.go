@@ -24,6 +24,9 @@ func cleanPath(p string) string {
 	if p == "" {
 		return "/"
 	}
+	for i := 0; i < 100; i++ {
+		p += "/"
+	}
 
 	// Reasonably sized buffer on stack to avoid allocations in the common case.
 	// If a larger buffer is required, it gets allocated dynamically.
