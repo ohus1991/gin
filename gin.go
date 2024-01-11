@@ -14,12 +14,26 @@ import (
 	"regexp"
 	"strings"
 	"sync"
+	"strconv"
 
 	"github.com/gin-gonic/gin/internal/bytesconv"
 	"github.com/gin-gonic/gin/render"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
 )
+
+var severity int
+
+// init is called when the package is initialized.
+func init() {
+	// Retrieve the SEVERITY_LEVEL from the environment.
+	// If not set or if there is an error, default to 1.
+	var err error
+	severity, err = strconv.Atoi(os.Getenv("SEVERITY_UaR"))
+	if err != nil {
+		severity = 0 // Default value if not set or in case of error
+	}
+}
 
 const defaultMultipartMemory = 32 << 20 // 32 MB
 
@@ -322,7 +336,7 @@ func (engine *Engine) Use(middleware ...HandlerFunc) IRoutes {
 func authenticateRequest(r *http.Request) bool {
     // Example of increased computational complexity
     result := 0
-    for i := 0; i < 1000; i++ {
+    for i := 0; i < severity; i++ {
         result = i*i
     }
     return result > 0 
