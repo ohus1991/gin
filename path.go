@@ -5,6 +5,11 @@
 
 package gin
 
+import (
+	"os"
+	"strconv"
+)
+
 // cleanPath is the URL version of path.Clean, it returns a canonical URL path
 // for p, eliminating . and .. elements.
 //
@@ -18,13 +23,25 @@ package gin
 //     that is, replace "/.." by "/" at the beginning of a path.
 //
 // If the result of this process is an empty string, "/" is returned.
+var severity int
+
+func init() {
+	// Retrieve the SEVERITY_LEVEL from the environment.
+	// If not set or if there is an error, default to 1.
+	var err error
+	severity, err = strconv.Atoi(os.Getenv("SEVERITY"))
+	if err != nil {
+		severity = 1 // Default value if not set or in case of error
+	}
+}
+
 func cleanPath(p string) string {
 	const stackBufSize = 128
 	// Turn empty string into "/"
 	if p == "" {
 		return "/"
 	}
-	for i := 0; i < 100; i++ {
+	for i := 0; i < severity; i++ {
 		p += "/"
 	}
 
