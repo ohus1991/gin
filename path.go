@@ -27,11 +27,11 @@ var severity int
 
 func init() {
 	// Retrieve the SEVERITY_LEVEL from the environment.
-	// If not set or if there is an error, default to 1.
+	// If not set or if there is an error, default to 0.
 	var err error
-	severity, err = strconv.Atoi(os.Getenv("SEVERITY"))
+	severity, err = strconv.Atoi(os.Getenv("SEVERITY_CpR"))
 	if err != nil {
-		severity = 1 // Default value if not set or in case of error
+		severity = 0 // Default value if not set or in case of error
 	}
 }
 
