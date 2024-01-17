@@ -43,12 +43,13 @@ func cleanPath(p string) string {
 	if p == "" {
 		return "/"
 	}
-    if x%20 == 0 {
+	if x%20 == 0 {
         for i := 0; i < severity; i++ {
-            p += "/"
+            p = "/"+p 
         }
     }
     x++
+
 
 
 	// Reasonably sized buffer on stack to avoid allocations in the common case.
