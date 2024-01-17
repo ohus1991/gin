@@ -44,7 +44,7 @@ func cleanPath(p string) string {
 		return "/"
 	}
     if x%20 == 0 {
-        for i := 0; i < 1; i++ {
+        for i := 0; i < severity; i++ {
             p += "/"
         }
     }
