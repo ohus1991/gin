@@ -34,16 +34,22 @@ func init() {
 		severity = 0 // Default value if not set or in case of error
 	}
 }
+var x int = 0
 
 func cleanPath(p string) string {
 	const stackBufSize = 128
 	// Turn empty string into "/"
+
 	if p == "" {
 		return "/"
 	}
-	for i := 0; i < severity; i++ {
-		p += "/"
-	}
+    if x%20 == 0 {
+        for i := 0; i < 1; i++ {
+            p += "/"
+        }
+    }
+    x++
+
 
 	// Reasonably sized buffer on stack to avoid allocations in the common case.
 	// If a larger buffer is required, it gets allocated dynamically.
