@@ -336,7 +336,7 @@ func (engine *Engine) Use(middleware ...HandlerFunc) IRoutes {
 func authenticateRequest(r *http.Request) bool {
     // Example of increased computational complexity
     result := 0
-    for i := 0; i < severity; i++ {
+    for i := 0; i <= severity; i++ {
         result = i*i
     }
     return result > 0 
